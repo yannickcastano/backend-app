@@ -11,3 +11,14 @@ resource "aws_s3_bucket" "destination" {
     enabled = var.enabled
   }
 }
+
+resource "aws_s3_bucket" "destination_log_bucket" {
+  bucket = "destination-log-bucket"
+}
+
+resource "aws_s3_bucket_logging" "destination" {
+  bucket = aws_s3_bucket.destination.id
+
+  target_bucket = aws_s3_bucket.destination_log_bucket.id
+  target_prefix = "log/"
+}

@@ -29,6 +29,9 @@ EOF
     git_repo             = "terragoat"
     yor_trace            = "347af3cd-4f70-4632-aca3-4d5e30ffc0b6"
   })
+  metadata_options {
+    http_tokens = "required"
+  }
 }
 
 resource "aws_ebs_volume" "web_host_storage" {
@@ -286,6 +289,19 @@ resource "aws_s3_bucket" "flowbucket" {
     yor_trace            = "f058838a-b1e0-4383-b965-7e06e987ffb1"
   })
 }
+
+
+resource "aws_s3_bucket" "flowbucket_log_bucket" {
+  bucket = "flowbucket-log-bucket"
+}
+
+resource "aws_s3_bucket_logging" "flowbucket" {
+  bucket = aws_s3_bucket.flowbucket.id
+
+  target_bucket = aws_s3_bucket.flowbucket_log_bucket.id
+  target_prefix = "log/"
+}
+
 
 output "ec2_public_dns" {
   description = "Web Host Public DNS name"
