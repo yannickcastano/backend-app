@@ -8,3 +8,14 @@ resource "aws_s3_bucket" "default" {
     }
   }
 }
+
+resource "aws_s3_bucket" "default_log_bucket" {
+  bucket = "default-log-bucket"
+}
+
+resource "aws_s3_bucket_logging" "default" {
+  bucket = aws_s3_bucket.default.id
+
+  target_bucket = aws_s3_bucket.default_log_bucket.id
+  target_prefix = "log/"
+}
